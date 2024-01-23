@@ -89,7 +89,17 @@ namespace MusicManagement.Library
         {
             return Favorites.OrderByDescending(song => song.Name).ToList();
         }
+        public List<Song> GetSongsForGenreSortedByNameDescending(Genre genre = null)
+        {
+            if (genre == null || genre == Genre.Undefined)
+            {
+                return Songs.Where(song => song.SongGenre == Genre.Undefined).OrderByDescending(song => song.Name).ToList();
+            }
+            else
+            {
+                return Songs.Where(song => song.SongGenre == genre).OrderByDescending(song => song.Name).ToList();
+            }
+        }
 
-        
     }
 }
