@@ -284,5 +284,65 @@ namespace MusicManager.Tests
         }
 
 
+        [Fact]
+        public void GetSongsForGenreSortedByNameDescending_ReturnsSortedListForSpecificGenre()
+        {
+            // Arrange
+            var musicLibrary = new MusicManagement.Library.MusicLibrary();
+            var rockGenre = new Genre("Rock");
+            var popGenre = new Genre("Pop");
+
+            var song1 = new Song("Song1", "Artist1", rockGenre);
+            var song2 = new Song("Song2", "Artist2", rockGenre);
+            var song3 = new Song("Song3", "Artist3", popGenre);
+
+            musicLibrary.AddGenre(rockGenre);
+            musicLibrary.AddGenre(popGenre);
+
+            musicLibrary.AddSong(song1);
+            musicLibrary.AddSong(song2);
+            musicLibrary.AddSong(song3);
+
+            // Act
+            var sortedRockSongs = musicLibrary.GetSongsForGenreSortedByNameDescending(rockGenre);
+
+            // Assert
+            Assert.Equal(new List<Song> { song2, song1 }, sortedRockSongs);
+        }
+
+        [Fact]
+        public void GetSongsForGenreSortedByNameDescending_ReturnsEmptyListForUndefinedGenre()
+        {
+            // Arrange
+            var musicLibrary = new MusicManagement.Library.MusicLibrary();
+            var undefinedGenre = Genre.Undefined;
+
+            // Act
+            var sortedUndefinedGenreSongs = musicLibrary.GetSongsForGenreSortedByNameDescending(undefinedGenre);
+
+            // Assert
+            Assert.Empty(sortedUndefinedGenreSongs);
+        }
+
+        [Fact]
+        public void GetSongsForGenreSortedByNameDescending_ReturnsSortedListForUndefinedGenre()
+        {
+            // Arrange
+            var musicLibrary = new MusicManagement.Library.MusicLibrary();
+            var undefinedGenre = Genre.Undefined;
+
+            var song1 = new Song("Song1", "Artist1", undefinedGenre);
+            var song2 = new Song("Song2", "Artist2", undefinedGenre);
+
+            musicLibrary.AddSong(song1);
+            musicLibrary.AddSong(song2);
+
+            // Act
+            var sortedUndefinedGenreSongs = musicLibrary.GetSongsForGenreSortedByNameDescending();
+
+            // Assert
+            Assert.Equal(new List<Song> { song2, song1 }, sortedUndefinedGenreSongs);
+        }
     }
+
 }
