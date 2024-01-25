@@ -288,7 +288,7 @@ namespace MusicManager.Tests
         public void GetSongsForGenreSortedByNameDescending_ReturnsSortedListForSpecificGenre()
         {
             // Arrange
-            var musicLibrary = new MusicManagement.Library.MusicLibrary();
+            var musicLibrary = new MusicLibrary();
             var rockGenre = new Genre("Rock");
             var popGenre = new Genre("Pop");
 
@@ -314,7 +314,7 @@ namespace MusicManager.Tests
         public void GetSongsForGenreSortedByNameDescending_ReturnsEmptyListForUndefinedGenre()
         {
             // Arrange
-            var musicLibrary = new MusicManagement.Library.MusicLibrary();
+            var musicLibrary = new MusicLibrary();
             var undefinedGenre = Genre.Undefined;
 
             // Act
@@ -328,7 +328,7 @@ namespace MusicManager.Tests
         public void GetSongsForGenreSortedByNameDescending_ReturnsSortedListForUndefinedGenre()
         {
             // Arrange
-            var musicLibrary = new MusicManagement.Library.MusicLibrary();
+            var musicLibrary = new MusicLibrary();
             var undefinedGenre = Genre.Undefined;
 
             var song1 = new Song("Song1", "Artist1", undefinedGenre);
